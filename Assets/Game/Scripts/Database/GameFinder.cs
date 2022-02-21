@@ -1,9 +1,7 @@
-using System.Collections;
-using Firebase.Database;
+using SaveData;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using SaveData;
 
 public static class GameFinder
 {
@@ -11,19 +9,18 @@ public static class GameFinder
     {
         List<GameData> games = await SaveManager.LoadMultipleObjects<GameData>("games/");
 
-        if(games == null) { Debug.Log("No games found..."); return null; }
+        if (games == null) { Debug.Log("No games found..."); return null; }
 
         foreach (GameData game in games) {
 
-            //TODO: Add all intended functionality :D
+            //TODO: Add all intended functionality
 
-            //if(!game.activeGame && game.players.Count < 2) { return game; }
             return game;
         }
 
         Debug.Log("No open games found...");
         return null;
-        
+
     }
 
     public static void FindGame(string gameID)

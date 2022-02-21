@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
     [SerializeField] TMP_Text userText, information;
 
-
     private void Start()
     {
-        if(User.Instance == null) { SceneManager.LoadScene("Login"); }
+        if (User.Instance == null) { SceneManager.LoadScene("Login"); }
         userText.text = $"{User.data.displayName} \nWins: {User.data.wins}";
     }
 
@@ -24,6 +20,4 @@ public class MenuController : MonoBehaviour
         information.text = "Found Game, joining...";
         return;
     }
-
-
 }

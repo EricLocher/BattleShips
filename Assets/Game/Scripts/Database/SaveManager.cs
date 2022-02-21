@@ -1,11 +1,10 @@
 using Firebase;
-using Firebase.Database;
 using Firebase.Auth;
-using SaveData;
-using UnityEngine;
-using System.Threading.Tasks;
+using Firebase.Database;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
-            if(task.Exception != null) { Debug.LogError(task.Exception.ToString()); return; }
+            if (task.Exception != null) { Debug.LogError(task.Exception.ToString()); return; }
             auth = FirebaseAuth.DefaultInstance;
         });
     }
@@ -53,7 +52,8 @@ public class SaveManager : MonoBehaviour
 
         try {
             return JsonUtility.FromJson<T>(jsonData);
-        } catch(Exception e) {
+        }
+        catch (Exception e) {
             Debug.LogError(e.ToString());
             return default(T);
         }
@@ -80,7 +80,7 @@ public class SaveManager : MonoBehaviour
 
         });
 
-        if(jsonData == null) { return null; }
+        if (jsonData == null) { return null; }
 
         List<T> objectList = new List<T>();
 
@@ -92,13 +92,14 @@ public class SaveManager : MonoBehaviour
     }
 
 
-    public async static Task<bool> SaveObject<T>(string path, T data){
+    public async static Task<bool> SaveObject<T>(string path, T data)
+    {
         Debug.Log("Saving Data...");
 
         string jsonData = JsonUtility.ToJson(data);
 
         return await db.RootReference.Child(path).SetRawJsonValueAsync(jsonData).ContinueWith(task => {
-            if(task.Exception != null) {
+            if (task.Exception != null) {
                 Debug.LogWarning(task.Exception);
                 return false;
             }
