@@ -54,13 +54,13 @@ public class BoardController : MonoBehaviour
                 GameController.NextTurn();
             }
         }
-        else if (GameController.gameState == GameStates.PlaceShips && Mouse.hoveringOver == _myBoard) {
-            if (Mouse.selectedShip != null) {
-                if (Mouse.hoveringOver.PlaceShip(relativePos, Mouse.selectedShip)) {
-                    Mouse.selectedShip = null;
-                }
-            }
-        }
+        //else if (GameController.gameState == GameStates.PlaceShips && Mouse.hoveringOver == _myBoard) {
+        //    if (Mouse.selectedShip != null) {
+        //        if (Mouse.hoveringOver.PlaceShip(relativePos, Mouse.selectedShip)) {
+        //            Mouse.selectedShip = null;
+        //        }
+        //    }
+        //}
     }
 
     void ChangeBoard(GameStates state)

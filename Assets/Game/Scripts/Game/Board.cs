@@ -11,11 +11,11 @@ public class Board : MonoBehaviour
 
     public Bounds bounds;
 
-    Cell[,] cells;
+    public Cell[,] cells;
     List<Ship> shipList = new List<Ship>();
     bool mouseOverBoard = false;
 
-    public void Init(Vector2 pos, int size = 11)
+    public void Init(Vector2 pos, int size = 10)
     {
         this.size = size;
         transform.position = pos;
@@ -35,7 +35,7 @@ public class Board : MonoBehaviour
             }
         }
 
-        bounds = new Bounds(new Vector3(pos.x + size/2, pos.y + size/2, 0), new Vector3(size, size, 0));
+        bounds = new Bounds(new Vector3(pos.x - 0.5f + ((float)size/2), pos.y - 0.5f + ((float)size/2), 0), new Vector3(10, 10, 0));
     }
 
     public bool AttackCell(Vector2 pos, CursorScriptableObject cursor)
@@ -68,27 +68,27 @@ public class Board : MonoBehaviour
 
     public bool PlaceShip(Vector2 pos, Ship ship)
     {
-        //TODO: Update this method to work for wider/different types of ships.
-
         Vector2Int _pos = new Vector2Int((int)pos.x, (int)pos.y);
 
-        if (Mouse.mousePosition.y - (ship.partList.Count - 1) < transform.position.y) { return false; }
+        //if (Mouse.mousePosition.y - (ship.partList.Count - 1) < transform.position.y) { return false; }
 
         for (int i = 0; i < ship.partList.Count; i++) {
-            if (cells[_pos.x, _pos.y - i].occupyingGameObject != null) { return false; }
+            if (cells[_pos.x, _pos.y - i].occupyingGameObject != null) { Debug.Log(_pos.x + "," + (_pos.y - i)); return false; }
         }
 
         for (int i = 0; i < ship.partList.Count; i++) {
-            if (cells[_pos.x, _pos.y - i].occupyingGameObject != null) { return false; }
+            if(i == 0) { ship.transform.position = cells[_pos.x, _pos.y - i].transform.position; }
+
 
             cells[_pos.x, _pos.y - i].occupyingGameObject = ship.partList[i];
-            ship.partList[i].transform.parent = cells[_pos.x, _pos.y - i].transform;
         }
 
         shipList.Add(ship);
         ship.transform.parent = transform;
         ship.pos = _pos;
         return true;
-
     }
+
+
+
 }

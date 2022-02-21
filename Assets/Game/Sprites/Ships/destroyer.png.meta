@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: 75331a80ce4b55c419089d489d666d7c
+guid: 73d9863cdc542c944aa561b6a951ba94
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8470065270455496937
-    second: Ship1_0
+      213: 6343824891992892864
+    second: destroyer_0
   - first:
-      213: 7535484155125654707
-    second: Ship1_1
-  - first:
-      213: 4986340529096905011
-    second: Ship1_2
+      213: 3309230411854091777
+    second: destroyer_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -55,7 +52,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 22
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,13 +133,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ship1_0
+      name: destroyer_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 44
-        width: 22
-        height: 22
+        y: 40
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,41 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71f802a4388447a80800000000000000
-      internalID: -8470065270455496937
+      spriteID: 0c56484d02bc90850800000000000000
+      internalID: 6343824891992892864
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ship1_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 22
-        width: 22
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3b469d41aea639860800000000000000
-      internalID: 7535484155125654707
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ship1_2
+      name: destroyer_1
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 22
-        height: 22
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,8 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33154fdda4a033540800000000000000
-      internalID: 4986340529096905011
+      spriteID: 1069b7ac68fbced20800000000000000
+      internalID: 3309230411854091777
       vertices: []
       indices: 
       edges: []

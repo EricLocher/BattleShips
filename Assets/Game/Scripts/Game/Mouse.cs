@@ -16,10 +16,6 @@ public class Mouse : MonoBehaviour
     public delegate void OnMouseClick();
     public static event OnMouseClick OnMouseClickEvent;
 
-    //Temp
-    [SerializeField] List<Ship> shipList;
-
-
     private void Awake()
     {
         if (_instance == null) {
@@ -39,15 +35,10 @@ public class Mouse : MonoBehaviour
     void Update()
     {
         UpdateMousePosition();
-        if (hoveringOver != null) { mousePosition = new Vector2(Mathf.RoundToInt(mousePosition.x), Mathf.RoundToInt(mousePosition.y)); }
-
+        //if (hoveringOver != null) { mousePosition = new Vector2(Mathf.RoundToInt(mousePosition.x), Mathf.RoundToInt(mousePosition.y)); }
 
         if (Input.GetMouseButtonDown(0)) {
             OnMouseClickEvent?.Invoke();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            selectedShip = Instantiate(shipList[0]);
         }
 
         if (selectedShip != null) {

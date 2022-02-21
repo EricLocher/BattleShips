@@ -9,12 +9,22 @@ namespace SaveData
     {
         public string displayName;
         public int wins;
+        public ShipData[] ships;
 
         public UserData(string displayName)
         {
             this.displayName = displayName;
             wins = 0;
+            ships = new ShipData[7];
+            ships[0] = new ShipData(new Vector2Int(9, 4), Direction.Vertical, ShipType.Carrier);
+            ships[1] = new ShipData(new Vector2Int(8, 3), Direction.Vertical, ShipType.Battleship);
+            ships[2] = new ShipData(new Vector2Int(7, 2), Direction.Vertical, ShipType.Cruiser);
+            ships[3] = new ShipData(new Vector2Int(6, 1), Direction.Vertical, ShipType.Destroyer);
+            ships[4] = new ShipData(new Vector2Int(5, 1), Direction.Vertical, ShipType.Destroyer);
+            ships[5] = new ShipData(new Vector2Int(4, 0), Direction.Vertical, ShipType.Submarine);
+            ships[6] = new ShipData(new Vector2Int(3, 0), Direction.Vertical, ShipType.Submarine);
         }
+
         public override string ToString() => $"Player: (displayName: {displayName}, wins: {wins})";
     }
 
@@ -52,4 +62,18 @@ namespace SaveData
         public override string ToString() => $"PlayerGameData: (displayName: {displayName}, doneTurn: {attack})";
     }
 
+    [Serializable]
+    public struct ShipData
+    {
+        public Vector2Int pos;
+        public Direction direction;
+        public ShipType type;
+
+        public ShipData(Vector2Int pos, Direction direction, ShipType type)
+        {
+            this.pos = pos;
+            this.direction = direction;
+            this.type = type;
+        }
+    }
 }
