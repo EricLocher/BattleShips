@@ -14,7 +14,7 @@ namespace SaveData
         {
             this.displayName = displayName;
             wins = 0;
-            //TODO: Make less ugly.
+            //TODO: Make less ugly - perhaps move to a json file format.
             //Assign the 'default' ship placements
             ships = new ShipData[7];
             ships[0] = new ShipData(new Vector2Int(9, 4), Direction.Vertical, ShipType.Carrier);
@@ -41,6 +41,8 @@ namespace SaveData
             this.gameID = gameID;
             this.activeGame = false;
             this.players = new PlayerGameData[2];
+
+            //TODO: Rethink this, perhaps change "PlayerGameData" to class/object instead of a struct
             this.players[0] = new PlayerGameData("empty");
             this.players[1] = new PlayerGameData("empty");
         }

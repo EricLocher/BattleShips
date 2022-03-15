@@ -16,7 +16,7 @@ public static class GameFinder
             //TODO: Check if game has an 'empty' player slot.
             //TODO: Check if the game has started or not.
 
-            //Return the first 'joinable' game found.
+            //Return the first 'open' game found.
             return game;
         }
 
