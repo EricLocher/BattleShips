@@ -17,6 +17,7 @@ public static class FireBaseLogin
                 return false;
             }
             UserData newUser = new UserData(username);
+            //Save new userInfo to db.
             SaveManager.SaveObject($"users/{task.Result.UserId}", newUser);
 
             return true;

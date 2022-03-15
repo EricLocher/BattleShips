@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using SaveData;
+using UnityEngine;
 
 public class PlaceShips : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class PlaceShips : MonoBehaviour
     {
         foreach (ShipData ship in User.data.ships) {
             Ship _ship = Instantiate(ShipList.list[(int)ship.type]);
-            if(!board.PlaceShip(ship.pos, _ship)) { Debug.LogError($"Ship couldn't be placed on the board! {ship.type}, {ship.pos}"); }
+            if (!board.PlaceShip(ship.pos, _ship)) { Debug.LogError($"Ship couldn't be placed on the board! {ship.type}, {ship.pos}"); }
         }
     }
 
@@ -46,7 +44,7 @@ public class PlaceShips : MonoBehaviour
 
     void MoveShip(Vector2 pos)
     {
-        if(Mouse.selectedShip != null) { PlaceShip(); return; }
+        if (Mouse.selectedShip != null) { PlaceShip(); return; }
 
         Vector2Int _pos = new Vector2Int((int)pos.x, (int)pos.y);
         if (board.cells[_pos.x, _pos.y].occupyingGameObject == null) { return; }

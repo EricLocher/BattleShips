@@ -14,6 +14,8 @@ namespace SaveData
         {
             this.displayName = displayName;
             wins = 0;
+            //TODO: Make less ugly.
+            //Assign the 'default' ship placements
             ships = new ShipData[7];
             ships[0] = new ShipData(new Vector2Int(9, 4), Direction.Vertical, ShipType.Carrier);
             ships[1] = new ShipData(new Vector2Int(8, 3), Direction.Vertical, ShipType.Battleship);

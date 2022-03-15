@@ -13,8 +13,10 @@ public static class GameFinder
 
         foreach (GameData game in games) {
 
-            //TODO: Add all intended functionality
+            //TODO: Check if game has an 'empty' player slot.
+            //TODO: Check if the game has started or not.
 
+            //Return the first 'joinable' game found.
             return game;
         }
 
@@ -25,6 +27,7 @@ public static class GameFinder
 
     public static void FindGame(string gameID)
     {
+        //TODO: Join the game with the given gameID.
         throw new System.NotImplementedException();
     }
 
@@ -32,11 +35,12 @@ public static class GameFinder
     {
         Debug.Log("Creating Game...");
 
+        //Generate a new unique gameID
         string key = SaveManager.db.RootReference.Child("games/").Push().Key;
         GameData game = new GameData(key);
         game.players[0] = new PlayerGameData(User.data.displayName);
 
-
+        //Save the created game to db.
         if (!await SaveManager.SaveObject($"games/{game.gameID}", game)) { return null; }
 
         return game;

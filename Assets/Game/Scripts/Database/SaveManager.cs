@@ -38,6 +38,13 @@ public class SaveManager : MonoBehaviour
 
     #region Load/Save Data
 
+    /// <summary>
+    /// Load an object from the database.
+    /// </summary>
+    /// <typeparam name="T">Object Type</typeparam>
+    /// <param name="path">Database Path</param>
+    /// <returns>Object of type (T)</returns>
+
     public async static Task<T> LoadObject<T>(string path)
     {
         string jsonData = await db.RootReference.Child(path).GetValueAsync().ContinueWith(task => {
@@ -60,6 +67,12 @@ public class SaveManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Load a list of objects from the database.
+    /// </summary>
+    /// <typeparam name="T">Object Type</typeparam>
+    /// <param name="path">Database Path</param>
+    /// <returns>List of objects of the type (T)</returns>
     public async static Task<List<T>> LoadMultipleObjects<T>(string path)
     {
 
@@ -91,7 +104,12 @@ public class SaveManager : MonoBehaviour
         return objectList;
     }
 
-
+    /// <summary>
+    /// Save an object to the database.
+    /// </summary>
+    /// <param name="path">Database Path</param>
+    /// <param name="data">Object to save</param>
+    /// <returns>Bool representing the result of the operation</returns>
     public async static Task<bool> SaveObject<T>(string path, T data)
     {
         Debug.Log("Saving Data...");

@@ -56,22 +56,31 @@ public class User : MonoBehaviour
     {
         GameData foundGame;
 
+        //Check if there are any 'open' games.
         foundGame = await GameFinder.FindGame();
 
+        //If a game was found - set the users active game then return true.
         if (foundGame != null) { activeGame = foundGame; Debug.Log("Game found..."); Debug.Log(foundGame.ToString()); return true; }
 
+        //If no games were found then attempt to create a new one.
         foundGame = await GameFinder.CreateGame();
+
+        //If a new game was created succefully - set the users active game then return true.
         if (foundGame != null) { activeGame = foundGame; return true; }
 
+        //No game could be found and something went wrong whilst creating a new game.
         Debug.Log("Something went wrong whilst matchmaking...");
         return false;
     }
 
     #endregion
 
+
+    //Load the current user's data from database.
     static async Task<UserData> LoadUserData()
     {
         userPath = $"users/{FirebaseAuth.DefaultInstance.CurrentUser.UserId}";
         return await SaveManager.LoadObject<UserData>(userPath);
+
     }
 }
