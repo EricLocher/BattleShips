@@ -9,18 +9,18 @@ public static class GameFinder
     {
         List<GameData> games = await SaveManager.LoadMultipleObjects<GameData>("games/");
 
-        if (games == null) { Debug.Log("No games found..."); return null; }
+        if (games == null) { return null; }
 
         foreach (GameData game in games) {
+            if (game.privateGame) { continue; }
+            if (!game.activeGame) { return game; }
 
             //TODO: Check if game has an 'empty' player slot.
-            //TODO: Check if the game has started or not.
 
             //Return the first 'open' game found.
             return game;
         }
 
-        Debug.Log("No open games found...");
         return null;
 
     }
@@ -38,7 +38,7 @@ public static class GameFinder
         //Generate a new unique gameID
         string key = SaveManager.db.RootReference.Child("games/").Push().Key;
         GameData game = new GameData(key);
-        game.players[0] = new PlayerGameData(User.data.displayName);
+        game.players[0] = new PlayerGameData(User.data.displayName, User.user.UserId);
 
         //Save the created game to db.
         if (!await SaveManager.SaveObject($"games/{game.gameID}", game)) { return null; }

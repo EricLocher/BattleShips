@@ -30,7 +30,6 @@ public class User : MonoBehaviour
     {
         if (user != null) { print("A user is already logged in!"); return; }
         await FireBaseLogin.RegisterNewUser(email, password, username);
-
         return;
     }
 
@@ -52,27 +51,32 @@ public class User : MonoBehaviour
     #endregion
 
     #region Matchmaking
-    public static async Task<bool> Matchmake()
+    public static async Task<GameData> Matchmake()
     {
         GameData foundGame;
 
         //Check if there are any 'open' games.
         foundGame = await GameFinder.FindGame();
+        
+        if (foundGame != null) {
+            activeGame = foundGame; Debug.Log("Game found..."); 
 
-        //If a game was found - set the users active game then return true.
-        if (foundGame != null) { activeGame = foundGame; Debug.Log("Game found..."); Debug.Log(foundGame.ToString()); return true; }
+            foundGame.players[1] = new PlayerGameData(data.displayName, user.UserId);
+            foundGame.activeGame = true;
+            await SaveManager.SaveObject($"games/{foundGame.gameID}", foundGame);
 
-        //If no games were found then attempt to create a new one.
+            return foundGame;
+        }
+
+        Debug.Log("No open game found...");
+
         foundGame = await GameFinder.CreateGame();
-
-        //If a new game was created succefully - set the users active game then return true.
-        if (foundGame != null) { activeGame = foundGame; return true; }
+        if (foundGame != null) { activeGame = foundGame; return foundGame; }
 
         //No game could be found and something went wrong whilst creating a new game.
         Debug.Log("Something went wrong whilst matchmaking...");
-        return false;
+        return null;
     }
-
     #endregion
 
 

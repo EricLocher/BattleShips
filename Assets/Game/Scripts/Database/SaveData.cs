@@ -33,18 +33,20 @@ namespace SaveData
     public class GameData
     {
         public string gameID;
-        public PlayerGameData[] players;
+        public bool privateGame;
         public bool activeGame;
+        public PlayerGameData[] players;
 
         public GameData(string gameID)
         {
             this.gameID = gameID;
+            this.privateGame = false;
             this.activeGame = false;
             this.players = new PlayerGameData[2];
-
-            //TODO: Rethink this, perhaps change "PlayerGameData" to class/object instead of a struct
-            this.players[0] = new PlayerGameData("empty");
-            this.players[1] = new PlayerGameData("empty");
+             //TODO: Rethink this, perhaps change "PlayerGameData" to class/object instead of a struct
+            this.players[0] = new PlayerGameData("empty", "noID");
+            this.players[1] = new PlayerGameData("empty", "noID");
+           
         }
 
         public override string ToString() => $"Game: (gameID: {gameID}, activeGame {activeGame}, player1: {players[0].displayName}, player2 {players[1].displayName})";
@@ -53,11 +55,13 @@ namespace SaveData
     [Serializable]
     public struct PlayerGameData
     {
+        public string userID;
         public string displayName;
         public Vector2Int attack;
 
-        public PlayerGameData(string displayName)
+        public PlayerGameData(string displayName, string userID)
         {
+            this.userID = userID;
             this.displayName = displayName;
             attack = Vector2Int.zero;
         }
