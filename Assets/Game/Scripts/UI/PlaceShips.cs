@@ -23,6 +23,10 @@ public class PlaceShips : MonoBehaviour
     void Update()
     {
         CheckMousePos();
+
+        if (Input.GetKeyDown(KeyCode.R)) {
+            RotateShip();
+        }
     }
 
     void MouseClick()
@@ -44,20 +48,41 @@ public class PlaceShips : MonoBehaviour
 
     void MoveShip(Vector2 pos)
     {
-        if (Mouse.selectedShip != null) { PlaceShip(); return; }
+        if (Mouse.selectedShip != null) { PlaceShip(pos); return; }
 
         Vector2Int _pos = new Vector2Int((int)pos.x, (int)pos.y);
         if (board.cells[_pos.x, _pos.y].occupyingGameObject == null) { return; }
 
         Ship _ship = board.cells[_pos.x, _pos.y].occupyingGameObject.GetComponentInParent<Ship>();
 
+        for (int i = 0; i < _ship.partList.Count; i++) {
+            if(_ship.direction == Direction.Vertical) {
+                board.cells[_pos.x, _pos.y - i].occupyingGameObject = null;
+            }
+            else {
+                //Might be -i instead of +i.
+                board.cells[_pos.x + i, _pos.y].occupyingGameObject = null;
+            }
+        }
+
         _ship.transform.parent = null;
         Mouse.selectedShip = _ship;
     }
 
-    void PlaceShip()
+    void PlaceShip(Vector2 pos)
     {
+        if (Mouse.hoveringOver.PlaceShip(pos, Mouse.selectedShip)) {
+            Mouse.selectedShip = null;
+        }
+    }
 
+    void RotateShip()
+    {
+        if(Mouse.selectedShip == null) { return; }
+        if(Mouse.selectedShip.direction == Direction.Vertical) { Mouse.selectedShip.direction = Direction.Horizontal; }
+        else { Mouse.selectedShip.direction = Direction.Vertical; }
+
+        Mouse.selectedShip.UpdateRotation();
     }
 
     void OnDestroy()

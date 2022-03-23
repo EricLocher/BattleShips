@@ -9,7 +9,6 @@ public class Ship : MonoBehaviour
     public ShipType shipType;
     public Bounds bounds;
 
-
     void Start()
     {
         UpdateRotation();

@@ -24,7 +24,7 @@ public class MenuController : MonoBehaviour
 
         if (foundGame.activeGame == true) { information.text = "Found Game, joining..."; return; }
 
-        information.text = "No actives games could be found \nCreated a new Game, waiting for players...";
+        information.text = "No actives games could be found. \nCreated a new Game, waiting for players...";
 
         SaveManager.db.GetReference($"games/{User.activeGame.gameID}/activeGame").ValueChanged += GameStarted;
     }
@@ -37,6 +37,11 @@ public class MenuController : MonoBehaviour
     }
 
     void OnDestroy()
+    {
+        SaveManager.db.GetReference($"games/{User.activeGame.gameID}/activeGame").ValueChanged -= GameStarted;
+    }
+
+    void OnApplicationQuit()
     {
         SaveManager.db.GetReference($"games/{User.activeGame.gameID}/activeGame").ValueChanged -= GameStarted;
     }

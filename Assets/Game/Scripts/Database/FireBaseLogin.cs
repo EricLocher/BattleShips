@@ -3,7 +3,6 @@ using SaveData;
 using System.Threading.Tasks;
 using UnityEngine;
 
-
 public static class FireBaseLogin
 {
     public static async Task<bool> RegisterNewUser(string email, string password, string username)
@@ -29,7 +28,7 @@ public static class FireBaseLogin
         Debug.Log("Attempting to sign in user");
 
         return await SaveManager.auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
-            if (task.Exception != null) {
+            if (task.Exception != null || task.IsFaulted) {
                 Debug.LogWarning(task.Exception);
                 return null;
             }

@@ -79,7 +79,6 @@ public class Board : MonoBehaviour
         for (int i = 0; i < ship.partList.Count; i++) {
             if(i == 0) { ship.transform.position = cells[_pos.x, _pos.y - i].transform.position; }
 
-
             cells[_pos.x, _pos.y - i].occupyingGameObject = ship.partList[i];
         }
 
@@ -88,7 +87,4 @@ public class Board : MonoBehaviour
         ship.pos = _pos;
         return true;
     }
-
-
-
 }

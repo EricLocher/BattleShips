@@ -43,10 +43,10 @@ namespace SaveData
             this.privateGame = false;
             this.activeGame = false;
             this.players = new PlayerGameData[2];
-             //TODO: Rethink this, perhaps change "PlayerGameData" to class/object instead of a struct
+            //TODO: Rethink this, perhaps change "PlayerGameData" to class/object instead of a struct
             this.players[0] = new PlayerGameData("empty", "noID");
             this.players[1] = new PlayerGameData("empty", "noID");
-           
+
         }
 
         public override string ToString() => $"Game: (gameID: {gameID}, activeGame {activeGame}, player1: {players[0].displayName}, player2 {players[1].displayName})";

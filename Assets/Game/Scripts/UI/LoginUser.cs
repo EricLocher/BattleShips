@@ -12,7 +12,7 @@ public class LoginUser : MonoBehaviour
         if (email.text == "") { errorText.text = "Invalid Email Adress."; return; }
         if (password.text == "") { errorText.text = "Invalid Password."; return; }
 
-        await User.SignIn(email.text, password.text);
+        if(!await User.SignIn(email.text, password.text)) { errorText.text = "Something went wrong..."; return; }
 
         SceneManager.LoadScene("MainMenu");
     }

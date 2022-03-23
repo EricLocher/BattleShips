@@ -33,13 +33,16 @@ public class User : MonoBehaviour
         return;
     }
 
-    public async static Task SignIn(string email, string password)
+    public async static Task<bool> SignIn(string email, string password)
     {
-        if (user != null) { print("A user is already logged in!"); return; }
+        if (user != null) { print("A user is already logged in!"); return false; }
         user = await FireBaseLogin.SignIn(email, password);
+
+        if(user == null) { return false; }
+
         data = await LoadUserData();
 
-        return;
+        return true;
     }
 
     public async static void AnonymousSignIn()
@@ -58,7 +61,7 @@ public class User : MonoBehaviour
         //Check if there are any 'open' games.
         foundGame = await GameFinder.FindGame();
         
-        if (foundGame != null) {
+        if (foundGame != null && foundGame.players[0].userID != user.UserId) {
             activeGame = foundGame; Debug.Log("Game found..."); 
 
             foundGame.players[1] = new PlayerGameData(data.displayName, user.UserId);

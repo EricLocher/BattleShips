@@ -12,8 +12,7 @@ public static class GameFinder
         if (games == null) { return null; }
 
         foreach (GameData game in games) {
-            if (game.privateGame) { continue; }
-            if (!game.activeGame) { return game; }
+            if (game.privateGame || game.activeGame) { continue; }
 
             //TODO: Check if game has an 'empty' player slot.
 
