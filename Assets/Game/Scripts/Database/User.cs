@@ -88,13 +88,26 @@ public class User : MonoBehaviour
     {
         userPath = $"users/{FirebaseAuth.DefaultInstance.CurrentUser.UserId}";
         return await SaveManager.LoadObject<UserData>(userPath);
-
     }
 
     public static async Task<bool> SaveUserData()
     {
         userPath = $"users/{FirebaseAuth.DefaultInstance.CurrentUser.UserId}";
         return (await SaveManager.SaveObject(userPath, data));
+    }
+
+    public static async Task LoadGameData()
+    {
+        string gamePath = $"games/{activeGame.gameID}";
+        activeGame = await SaveManager.LoadObject<GameData>(gamePath);
+
+    }
+
+    public static async Task SaveGameData()
+    {
+        string gamePath = $"games/{activeGame.gameID}";
+        await SaveManager.SaveObject(gamePath, activeGame);
+
     }
 
 }

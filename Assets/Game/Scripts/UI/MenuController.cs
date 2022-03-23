@@ -29,10 +29,11 @@ public class MenuController : MonoBehaviour
         SaveManager.db.GetReference($"games/{User.activeGame.gameID}/activeGame").ValueChanged += GameStarted;
     }
 
-    public void GameStarted(object sender, ValueChangedEventArgs args)
+    public async void GameStarted(object sender, ValueChangedEventArgs args)
     {
         if(!(bool)args.Snapshot.Value) { return; }
         information.text = "Both players have joined! Starting game...";
+        await User.LoadGameData();
         SceneManager.LoadScene("Game");
 
         SaveManager.db.GetReference($"games/{User.activeGame.gameID}/activeGame").ValueChanged -= GameStarted;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using SaveData;
+using Firebase.Database;
 
 
 public class GameController : MonoBehaviour
@@ -15,10 +16,6 @@ public class GameController : MonoBehaviour
     public delegate void OnStateChange(TurnStates state);
     public static event OnStateChange OnStateChangeEvent;
 
-
-
-
-
     void Awake()
     {
         if (_instance == null) {
@@ -31,6 +28,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+
         if(User.activeGame.players[0].userID == User.user.UserId) {
             userIndex = 0;
             opponentIndex = 1;
@@ -42,19 +40,23 @@ public class GameController : MonoBehaviour
 
         turnState = (TurnStates)userIndex;
 
-        //ShipList.list[(int)ship.type];
-    }
+        SaveManager.db.GetReference($"games/{User.activeGame.gameID}/players/{opponentIndex}/attack").ValueChanged += OnOpponentMove;
 
-    public static void ChangeState(TurnStates state)
-    {
-        turnState = state;
-        OnStateChangeEvent?.Invoke(state);
+        //ShipList.list[(int)ship.type];
     }
 
     public static void NextTurn()
     {
         if (turnState == TurnStates.OpponentTurn) { turnState = TurnStates.MyTurn; }
         else { turnState = TurnStates.OpponentTurn; }
+
+        OnStateChangeEvent?.Invoke(turnState);
+    }
+
+    void OnOpponentMove(object sender, ValueChangedEventArgs args)
+    {
+        if(turnState == TurnStates.MyTurn) { return; }
+        NextTurn();
     }
 
 }

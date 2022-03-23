@@ -65,7 +65,7 @@ namespace SaveData
             this.userID = userID;
             this.displayName = displayName;
             this.ships = ships;
-            attack = Vector2Int.zero;
+            attack = new Vector2Int(-1, -1);
         }
 
         public override string ToString() => $"PlayerGameData: (displayName: {displayName}, doneTurn: {attack})";

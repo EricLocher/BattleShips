@@ -19,13 +19,14 @@ public class BoardController : MonoBehaviour
     public void Init()
     {
         _myBoard = Instantiate(_board, transform);
+        _myBoard.name = "MyBoard";
         _opponentBoard = Instantiate(_board, transform);
+        _opponentBoard.name = "OpponentsBoard";
 
         _myBoard.Init(Vector2.zero, boardSize);
         _opponentBoard.Init(new Vector2(0, 50), boardSize);
 
         LoadShips(_myBoard, GameController.userIndex);
-        //Weird error happens, does not load opponents board :7
         LoadShips(_opponentBoard, GameController.opponentIndex);
 
         GameController.OnStateChangeEvent += ChangeBoard;
@@ -39,7 +40,6 @@ public class BoardController : MonoBehaviour
         foreach (ShipData ship in User.activeGame.players[playerIndex].ships) {
             Ship _ship = Instantiate(ShipList.list[(int)ship.type]);
             _ship.direction = ship.direction;
-
 
             if (!board.PlaceShip(ship.pos, _ship)) { Debug.LogError($"Ship couldn't be placed on the board! {ship.type}, {ship.pos}"); }
             board.shipList.Add(_ship);
@@ -61,7 +61,7 @@ public class BoardController : MonoBehaviour
         Mouse.hoveringOver = null;
     }
 
-    void MouseClick()
+    async void MouseClick()
     {
         CheckMousePos();
         if (GameController.turnState != TurnStates.MyTurn) { return; }
@@ -71,6 +71,9 @@ public class BoardController : MonoBehaviour
 
         if (Mouse.hoveringOver == _opponentBoard) {
             if (Mouse.hoveringOver.AttackCell(relativePos, Mouse._currentCursor)) {
+                Vector2Int _pos = new Vector2Int((int)relativePos.x, (int)relativePos.y);
+                User.activeGame.players[GameController.userIndex].attack = _pos;
+                await User.SaveGameData();
                 GameController.NextTurn();
             }
         }
