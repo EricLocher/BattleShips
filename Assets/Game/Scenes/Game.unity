@@ -476,8 +476,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultCursor: {fileID: 11400000, guid: a1089b36c5089b849a889dbc79401268, type: 2}
-  shipList:
-  - {fileID: 4131778197869737126, guid: 8612dfc950e603b4b9a55e500e3bd0e1, type: 3}
 --- !u!1 &1089489037
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _board: {fileID: 4266651114429643449, guid: 1865c16b29ee6eb4f9ae2ce5daa0cf72, type: 3}
   _mainCamera: {fileID: 519420031}
-  boardSize: 11
+  boardSize: 10
 --- !u!4 &1089489039
 Transform:
   m_ObjectHideFlags: 0

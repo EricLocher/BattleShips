@@ -12,11 +12,7 @@ public class TestingText : MonoBehaviour
 
     void Update()
     {
-        text = $"{GameController.gameState}";
-
-        if (GameController.gameState == GameStates.PlaceShips || GameController.gameState == GameStates.Attack) {
-            text += $"\n{GameController.turnState}";
-        }
+        text = $"{GameController.turnState}";
 
         _text.text = text;
     }

@@ -1,17 +1,23 @@
 using UnityEngine;
+using SaveData;
+
 
 public class GameController : MonoBehaviour
 {
-
     private static GameController _instance;
     public static GameController Instance { get { return _instance; } }
 
-    public static GameStates gameState;
     public static TurnStates turnState;
 
+    public static int userIndex;
+    public static int opponentIndex;
 
-    public delegate void OnStateChange(GameStates state);
+    public delegate void OnStateChange(TurnStates state);
     public static event OnStateChange OnStateChangeEvent;
+
+
+
+
 
     void Awake()
     {
@@ -25,30 +31,25 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        gameState = GameStates.Init;
+        if(User.activeGame.players[0].userID == User.user.UserId) {
+            userIndex = 0;
+            opponentIndex = 1;
+        }
+        else {
+            userIndex = 1;
+            opponentIndex = 0;
+        }
+
+        turnState = (TurnStates)userIndex;
+
+        //ShipList.list[(int)ship.type];
     }
 
-    //Temp Update Loop
-    void Update()
+    public static void ChangeState(TurnStates state)
     {
-        if (Input.GetKeyDown(KeyCode.N)) {
-            NextTurn();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y)) {
-            ChangeState(GameStates.PlaceShips);
-        }
-        if (Input.GetKeyDown(KeyCode.U)) {
-            ChangeState(GameStates.Attack);
-        }
-    }
-
-    public static void ChangeState(GameStates state)
-    {
-        gameState = state;
+        turnState = state;
         OnStateChangeEvent?.Invoke(state);
     }
-
 
     public static void NextTurn()
     {
@@ -56,19 +57,10 @@ public class GameController : MonoBehaviour
         else { turnState = TurnStates.OpponentTurn; }
     }
 
-
-}
-
-public enum GameStates
-{
-    Init,
-    PlaceShips,
-    Attack,
-    Result
 }
 
 public enum TurnStates
 {
-    OpponentTurn,
-    MyTurn
+    MyTurn,
+    OpponentTurn
 }

@@ -37,7 +37,7 @@ public static class GameFinder
         //Generate a new unique gameID
         string key = SaveManager.db.RootReference.Child("games/").Push().Key;
         GameData game = new GameData(key);
-        game.players[0] = new PlayerGameData(User.data.displayName, User.user.UserId);
+        game.players[0] = new PlayerGameData(User.data.displayName, User.user.UserId, User.data.ships);
 
         //Save the created game to db.
         if (!await SaveManager.SaveObject($"games/{game.gameID}", game)) { return null; }

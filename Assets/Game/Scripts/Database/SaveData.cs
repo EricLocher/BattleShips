@@ -44,8 +44,8 @@ namespace SaveData
             this.activeGame = false;
             this.players = new PlayerGameData[2];
             //TODO: Rethink this, perhaps change "PlayerGameData" to class/object instead of a struct
-            this.players[0] = new PlayerGameData("empty", "noID");
-            this.players[1] = new PlayerGameData("empty", "noID");
+            this.players[0] = new PlayerGameData("empty", "noID", new ShipData[0]);
+            this.players[1] = new PlayerGameData("empty", "noID", new ShipData[0]);
 
         }
 
@@ -57,12 +57,14 @@ namespace SaveData
     {
         public string userID;
         public string displayName;
+        public ShipData[] ships;
         public Vector2Int attack;
 
-        public PlayerGameData(string displayName, string userID)
+        public PlayerGameData(string displayName, string userID, ShipData[] ships)
         {
             this.userID = userID;
             this.displayName = displayName;
+            this.ships = ships;
             attack = Vector2Int.zero;
         }
 

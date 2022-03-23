@@ -22,7 +22,7 @@ public class MenuController : MonoBehaviour
 
         if (foundGame == null) { information.text = "Something went wrong, try again..."; return; }
 
-        if (foundGame.activeGame == true) { information.text = "Found Game, joining..."; return; }
+        if (foundGame.activeGame == true) { information.text = "Found Game, joining..."; SceneManager.LoadScene("Game"); return; }
 
         information.text = "No actives games could be found. \nCreated a new Game, waiting for players...";
 
@@ -33,6 +33,8 @@ public class MenuController : MonoBehaviour
     {
         if(!(bool)args.Snapshot.Value) { return; }
         information.text = "Both players have joined! Starting game...";
+        SceneManager.LoadScene("Game");
+
         SaveManager.db.GetReference($"games/{User.activeGame.gameID}/activeGame").ValueChanged -= GameStarted;
     }
 

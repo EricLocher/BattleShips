@@ -1,9 +1,12 @@
 using SaveData;
 using UnityEngine;
+using TMPro;
 
 public class PlaceShips : MonoBehaviour
 {
     [SerializeField] Board board;
+
+    Vector2Int oldShipPos = Vector2Int.zero;
 
     void Start()
     {
@@ -16,7 +19,9 @@ public class PlaceShips : MonoBehaviour
     {
         foreach (ShipData ship in User.data.ships) {
             Ship _ship = Instantiate(ShipList.list[(int)ship.type]);
+            _ship.direction = ship.direction;
             if (!board.PlaceShip(ship.pos, _ship)) { Debug.LogError($"Ship couldn't be placed on the board! {ship.type}, {ship.pos}"); }
+            board.shipList.Add(_ship);
         }
     }
 
@@ -56,14 +61,11 @@ public class PlaceShips : MonoBehaviour
         Ship _ship = board.cells[_pos.x, _pos.y].occupyingGameObject.GetComponentInParent<Ship>();
 
         for (int i = 0; i < _ship.partList.Count; i++) {
-            if(_ship.direction == Direction.Vertical) {
-                board.cells[_pos.x, _pos.y - i].occupyingGameObject = null;
-            }
-            else {
-                //Might be -i instead of +i.
-                board.cells[_pos.x + i, _pos.y].occupyingGameObject = null;
-            }
+            _ship.partList[i].occupyingCell.occupyingGameObject = null;
+            _ship.partList[i].occupyingCell = null;
         }
+
+        oldShipPos = _pos;
 
         _ship.transform.parent = null;
         Mouse.selectedShip = _ship;
@@ -71,12 +73,13 @@ public class PlaceShips : MonoBehaviour
 
     void PlaceShip(Vector2 pos)
     {
-        if (Mouse.hoveringOver.PlaceShip(pos, Mouse.selectedShip)) {
+        if (board.PlaceShip(pos, Mouse.selectedShip)) {
             Mouse.selectedShip = null;
+            oldShipPos = Vector2Int.zero;
         }
     }
 
-    void RotateShip()
+    public void RotateShip()
     {
         if(Mouse.selectedShip == null) { return; }
         if(Mouse.selectedShip.direction == Direction.Vertical) { Mouse.selectedShip.direction = Direction.Horizontal; }
@@ -84,6 +87,19 @@ public class PlaceShips : MonoBehaviour
 
         Mouse.selectedShip.UpdateRotation();
     }
+
+    public async void SaveShips()
+    {
+        if (Mouse.selectedShip != null) { PlaceShip(oldShipPos); }
+        oldShipPos = Vector2Int.zero;
+
+        for (int i = 0; i < board.shipList.Count; i++) {
+            User.data.ships[i] = (ShipData)board.shipList[i];
+        }
+
+        await User.SaveUserData();
+    }
+
 
     void OnDestroy()
     {

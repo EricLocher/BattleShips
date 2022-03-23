@@ -64,7 +64,7 @@ public class User : MonoBehaviour
         if (foundGame != null && foundGame.players[0].userID != user.UserId) {
             activeGame = foundGame; Debug.Log("Game found..."); 
 
-            foundGame.players[1] = new PlayerGameData(data.displayName, user.UserId);
+            foundGame.players[1] = new PlayerGameData(data.displayName, user.UserId, data.ships);
             foundGame.activeGame = true;
             await SaveManager.SaveObject($"games/{foundGame.gameID}", foundGame);
 
@@ -90,4 +90,11 @@ public class User : MonoBehaviour
         return await SaveManager.LoadObject<UserData>(userPath);
 
     }
+
+    public static async Task<bool> SaveUserData()
+    {
+        userPath = $"users/{FirebaseAuth.DefaultInstance.CurrentUser.UserId}";
+        return (await SaveManager.SaveObject(userPath, data));
+    }
+
 }

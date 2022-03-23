@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using SaveData;
 
 public class Ship : MonoBehaviour
 {
     public Vector2Int pos = Vector2Int.zero;
-    public List<GameObject> partList;
+    public List<ShipPart> partList;
     public Direction direction = Direction.Vertical;
     public ShipType shipType;
     public Bounds bounds;
@@ -34,6 +35,10 @@ public class Ship : MonoBehaviour
         UpdateRotation();
     }
 
+    public static explicit operator ShipData(Ship ship)
+    {
+        return new ShipData(ship.pos, ship.direction, ship.shipType);
+    }
 }
 
 public enum Direction

@@ -6,18 +6,15 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField] int size;
     [SerializeField] Cell _cell;
 
     public Bounds bounds;
 
     public Cell[,] cells;
-    List<Ship> shipList = new List<Ship>();
-    bool mouseOverBoard = false;
+    public List<Ship> shipList = new List<Ship>();
 
     public void Init(Vector2 pos, int size = 10)
     {
-        this.size = size;
         transform.position = pos;
         cells = new Cell[size, size];
 
@@ -72,17 +69,28 @@ public class Board : MonoBehaviour
 
         //if (Mouse.mousePosition.y - (ship.partList.Count - 1) < transform.position.y) { return false; }
 
-        for (int i = 0; i < ship.partList.Count; i++) {
-            if (cells[_pos.x, _pos.y - i].occupyingGameObject != null) { Debug.Log(_pos.x + "," + (_pos.y - i)); return false; }
+        try {
+            for (int i = 0; i < ship.partList.Count; i++) {
+
+                Vector2Int posToCheck = (ship.direction == Direction.Vertical) ? new Vector2Int(_pos.x, _pos.y - i) : new Vector2Int(_pos.x + i, _pos.y);
+
+                if (cells[posToCheck.x, posToCheck.y].occupyingGameObject != null) { Debug.Log(posToCheck); return false; }
+            }
+
+            for (int i = 0; i < ship.partList.Count; i++) {
+                Vector2Int posToCheck = (ship.direction == Direction.Vertical) ? new Vector2Int(_pos.x, _pos.y - i) : new Vector2Int(_pos.x + i, _pos.y);
+
+                if (i == 0) { ship.transform.position = cells[posToCheck.x, posToCheck.y].transform.position; }
+
+                cells[posToCheck.x, posToCheck.y].occupyingGameObject = ship.partList[i].gameObject;
+                ship.partList[i].occupyingCell = cells[posToCheck.x, posToCheck.y];
+            }
+        }
+        catch(Exception e) {
+            Debug.LogWarning(e.ToString());
+            return false;
         }
 
-        for (int i = 0; i < ship.partList.Count; i++) {
-            if(i == 0) { ship.transform.position = cells[_pos.x, _pos.y - i].transform.position; }
-
-            cells[_pos.x, _pos.y - i].occupyingGameObject = ship.partList[i];
-        }
-
-        shipList.Add(ship);
         ship.transform.parent = transform;
         ship.pos = _pos;
         return true;
