@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
 
     public static TurnStates turnState;
 
+    public BoardController boardController;
     public static int userIndex;
     public static int opponentIndex;
 
@@ -22,7 +23,7 @@ public class GameController : MonoBehaviour
             _instance = this;
         }
         else {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -53,12 +54,16 @@ public class GameController : MonoBehaviour
         OnStateChangeEvent?.Invoke(turnState);
     }
 
-    void OnOpponentMove(object sender, ValueChangedEventArgs args)
+    async void OnOpponentMove(object sender, ValueChangedEventArgs args)
     {
-        if(turnState == TurnStates.MyTurn) { return; }
-        NextTurn();
-    }
+        if (turnState == TurnStates.MyTurn) { return; }
 
+        await User.LoadGameData();
+        if (User.activeGame.players[opponentIndex].attack != new Vector2Int(-1, -1)) {
+            boardController.OpponentAttack(User.activeGame.players[opponentIndex].attack);
+            NextTurn();
+        }
+    }
 }
 
 public enum TurnStates

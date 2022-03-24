@@ -40,8 +40,8 @@ public class Board : MonoBehaviour
         if(pos.x < 0 || pos.y < 0) { return false; }
         if(pos.x > cells.GetLength(0) || pos.y > (cells.GetLength(1))) { return false; }
 
-        Vector2Int _pos = new Vector2Int((int)pos.x, (int)pos.y);
-        if(cells[_pos.x, _pos.y].isDead) { return false; }
+        Vector2Int _pos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+        if (cells[_pos.x, _pos.y].isDead) { return false; }
 
         foreach (Vector2Int part in cursor.cursorParts) {
             AttackCell(new Vector2(_pos.x + part.x, _pos.y + part.y));
@@ -55,7 +55,7 @@ public class Board : MonoBehaviour
         if(pos.x < 0 || pos.y < 0) { return false; }
         if(pos.x > cells.GetLength(0) || pos.y > (cells.GetLength(1))) { return false; }
 
-        Vector2Int _pos = new Vector2Int((int)pos.x, (int)pos.y);
+        Vector2Int _pos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
 
         if (cells[_pos.x, _pos.y].isDead) { return false; }
 
@@ -65,9 +65,7 @@ public class Board : MonoBehaviour
 
     public bool PlaceShip(Vector2 pos, Ship ship)
     {
-        Vector2Int _pos = new Vector2Int((int)pos.x, (int)pos.y);
-
-        //if (Mouse.mousePosition.y - (ship.partList.Count - 1) < transform.position.y) { return false; }
+        Vector2Int _pos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
 
         try {
             for (int i = 0; i < ship.partList.Count; i++) {

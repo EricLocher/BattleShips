@@ -23,8 +23,8 @@ public class BoardController : MonoBehaviour
         _opponentBoard = Instantiate(_board, transform);
         _opponentBoard.name = "OpponentsBoard";
 
-        _myBoard.Init(Vector2.zero, boardSize);
-        _opponentBoard.Init(new Vector2(0, 50), boardSize);
+        _myBoard.Init(new Vector2(0, -6), boardSize);
+        _opponentBoard.Init(new Vector2(0, 6), boardSize);
 
         LoadShips(_myBoard, GameController.userIndex);
         LoadShips(_opponentBoard, GameController.opponentIndex);
@@ -32,7 +32,7 @@ public class BoardController : MonoBehaviour
         GameController.OnStateChangeEvent += ChangeBoard;
         Mouse.OnMouseClickEvent += MouseClick;
 
-        ChangeBoard(GameController.turnState);
+        _mainCamera.transform.position = new Vector3(4.5f, 4.5f, -10);
     }
 
     void LoadShips(Board board, int playerIndex)
@@ -71,24 +71,23 @@ public class BoardController : MonoBehaviour
 
         if (Mouse.hoveringOver == _opponentBoard) {
             if (Mouse.hoveringOver.AttackCell(relativePos, Mouse._currentCursor)) {
-                Vector2Int _pos = new Vector2Int((int)relativePos.x, (int)relativePos.y);
+                Vector2Int _pos = new Vector2Int(Mathf.RoundToInt(relativePos.x), Mathf.RoundToInt(relativePos.y));
                 User.activeGame.players[GameController.userIndex].attack = _pos;
                 await User.SaveGameData();
                 GameController.NextTurn();
             }
         }
     }
+    public void OpponentAttack(Vector2Int pos)
+    {
+        _myBoard.AttackCell(pos);
+    }
 
     void ChangeBoard(TurnStates state)
     {
-        Vector3 _cameraPos = new Vector3(4.5f, (float)boardSize / 2, -10);
-
-        if (state == TurnStates.OpponentTurn) { _cameraPos += _myBoard.transform.position; }
-        else if(state == TurnStates.MyTurn) { _cameraPos += _opponentBoard.transform.position; }
-
-        _mainCamera.transform.position = _cameraPos;
+       if (state == TurnStates.OpponentTurn) {  }
+       else if(state == TurnStates.MyTurn) {  }
     }
-
 
     void OnDestroy()
     {

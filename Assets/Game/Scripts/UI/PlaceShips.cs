@@ -55,7 +55,7 @@ public class PlaceShips : MonoBehaviour
     {
         if (Mouse.selectedShip != null) { PlaceShip(pos); return; }
 
-        Vector2Int _pos = new Vector2Int((int)pos.x, (int)pos.y);
+        Vector2Int _pos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
         if (board.cells[_pos.x, _pos.y].occupyingGameObject == null) { return; }
 
         Ship _ship = board.cells[_pos.x, _pos.y].occupyingGameObject.GetComponentInParent<Ship>();

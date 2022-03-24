@@ -10,6 +10,10 @@ public class Ship : MonoBehaviour
     public ShipType shipType;
     public Bounds bounds;
 
+    public static explicit operator ShipData(Ship ship)
+    {
+        return new ShipData(ship.pos, ship.direction, ship.shipType);
+    }
     void Start()
     {
         UpdateRotation();
@@ -33,11 +37,6 @@ public class Ship : MonoBehaviour
         else { direction = Direction.Vertical; }
 
         UpdateRotation();
-    }
-
-    public static explicit operator ShipData(Ship ship)
-    {
-        return new ShipData(ship.pos, ship.direction, ship.shipType);
     }
 }
 

@@ -100,7 +100,6 @@ public class User : MonoBehaviour
     {
         string gamePath = $"games/{activeGame.gameID}";
         activeGame = await SaveManager.LoadObject<GameData>(gamePath);
-
     }
 
     public static async Task SaveGameData()

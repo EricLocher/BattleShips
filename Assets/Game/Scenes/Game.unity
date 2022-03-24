@@ -449,6 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63bdd705e1d7b4981389f179dc3079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boardController: {fileID: 1089489038}
 --- !u!4 &894250595
 Transform:
   m_ObjectHideFlags: 0
@@ -507,7 +508,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _board: {fileID: 4266651114429643449, guid: 1865c16b29ee6eb4f9ae2ce5daa0cf72, type: 3}
   _mainCamera: {fileID: 519420031}
-  boardSize: 10
 --- !u!4 &1089489039
 Transform:
   m_ObjectHideFlags: 0
