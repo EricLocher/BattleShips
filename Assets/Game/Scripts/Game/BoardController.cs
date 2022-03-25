@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using SaveData;
 
 public class BoardController : MonoBehaviour
@@ -26,7 +27,7 @@ public class BoardController : MonoBehaviour
         _opponentBoard.Init(new Vector2(0, 6), boardSize);
 
         LoadShips(_myBoard, GameController.userIndex);
-        LoadShips(_opponentBoard, GameController.opponentIndex);
+        LoadShips(_opponentBoard, GameController.opponentIndex, true);
 
         GameController.OnStateChangeEvent += ChangeBoard;
         Mouse.OnMouseClickEvent += MouseClick;
@@ -34,13 +35,13 @@ public class BoardController : MonoBehaviour
         ChangeBoard(GameController.turnState);
     }
 
-    void LoadShips(Board board, int playerIndex)
+    void LoadShips(Board board, int playerIndex, bool hideShips = false)
     {
         foreach (ShipData ship in User.activeGame.players[playerIndex].ships) {
             Ship _ship = Instantiate(ShipList.list[(int)ship.type]);
             _ship.direction = ship.direction;
 
-            if (!board.PlaceShip(ship.pos, _ship)) { Debug.LogError($"Ship couldn't be placed on the board! {ship.type}, {ship.pos}"); }
+            if (!board.PlaceShip(ship.pos, _ship, hideShips)) { Debug.LogError($"Ship couldn't be placed on the board! {ship.type}, {ship.pos}"); }
             board.shipList.Add(_ship);
         }
     }
@@ -87,13 +88,11 @@ public class BoardController : MonoBehaviour
     void CheckWinCondition()
     {
         if (_myBoard.deadBoard) {
-
-
-
+            SceneManager.LoadScene("Lose");
         } else if (_opponentBoard.deadBoard) {
-
-
-
+            User.data.wins += 1;
+            User.SaveUserData();
+            SceneManager.LoadScene("Win");
         }
     }
 

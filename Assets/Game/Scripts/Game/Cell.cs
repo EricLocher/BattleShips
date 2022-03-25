@@ -9,7 +9,7 @@ public class Cell : MonoBehaviour
     public bool isDead = false;
     Bounds cellBounds;
 
-    public GameObject occupyingGameObject = null;
+    public ShipPart shipPart = null;
 
     public void Init(bool isOffset)
     {
@@ -43,5 +43,7 @@ public class Cell : MonoBehaviour
     public void Hit()
     {
         isDead = true;
+        if(shipPart != null)
+            shipPart.spr.enabled = true;
     }
 }

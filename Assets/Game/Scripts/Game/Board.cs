@@ -80,7 +80,7 @@ public class Board : MonoBehaviour
         return true;
     }
 
-    public bool PlaceShip(Vector2 pos, Ship ship)
+    public bool PlaceShip(Vector2 pos, Ship ship, bool hideShip = false)
     {
         Vector2Int _pos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
 
@@ -89,7 +89,7 @@ public class Board : MonoBehaviour
 
                 Vector2Int posToCheck = (ship.direction == Direction.Vertical) ? new Vector2Int(_pos.x, _pos.y - i) : new Vector2Int(_pos.x + i, _pos.y);
 
-                if (cells[posToCheck.x, posToCheck.y].occupyingGameObject != null) { Debug.Log(posToCheck); return false; }
+                if (cells[posToCheck.x, posToCheck.y].shipPart != null) { Debug.Log(posToCheck); return false; }
             }
 
             for (int i = 0; i < ship.partList.Count; i++) {
@@ -97,8 +97,9 @@ public class Board : MonoBehaviour
 
                 if (i == 0) { ship.transform.position = cells[posToCheck.x, posToCheck.y].transform.position; }
 
-                cells[posToCheck.x, posToCheck.y].occupyingGameObject = ship.partList[i].gameObject;
+                cells[posToCheck.x, posToCheck.y].shipPart = ship.partList[i];
                 ship.partList[i].occupyingCell = cells[posToCheck.x, posToCheck.y];
+                ship.partList[i].spr.enabled = !hideShip;
             }
         }
         catch (Exception e) {

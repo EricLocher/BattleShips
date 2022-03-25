@@ -19,7 +19,6 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-
         if(User.activeGame.players[0].userID == User.user.UserId) {
             userIndex = 0;
             opponentIndex = 1;
@@ -31,8 +30,6 @@ public class GameController : MonoBehaviour
 
         turnState = (TurnStates)userIndex;
         SaveManager.db.GetReference($"games/{User.activeGame.gameID}/players/{opponentIndex}/attack").ValueChanged += OnOpponentMove;
-
-        //ShipList.list[(int)ship.type];
     }
 
     public static void NextTurn()
