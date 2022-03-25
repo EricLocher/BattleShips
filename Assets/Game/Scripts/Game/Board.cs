@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +6,25 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     [SerializeField] Cell _cell;
+    [SerializeField] GameObject inactive;
+
+    public bool activeBoard
+    {
+        set { inactive.SetActive(value); }
+    }
 
     public Bounds bounds;
+    public bool deadBoard
+    {
+        get {
+            foreach (Ship _ship in shipList) {
+                foreach (ShipPart _part in _ship.partList) {
+                    if (!_part.occupyingCell.isDead) { return false; }
+                }
+            }
+            return true;
+        }
+    }
 
     public Cell[,] cells;
     public List<Ship> shipList = new List<Ship>();
@@ -17,6 +33,7 @@ public class Board : MonoBehaviour
     {
         transform.position = pos;
         cells = new Cell[size, size];
+        inactive.transform.localScale = new Vector2(size, size);
 
         var _cellHolder = new GameObject();
         _cellHolder.name = "CellHolder";
@@ -32,13 +49,13 @@ public class Board : MonoBehaviour
             }
         }
 
-        bounds = new Bounds(new Vector3(pos.x - 0.5f + ((float)size/2), pos.y - 0.5f + ((float)size/2), 0), new Vector3(10, 10, 0));
+        bounds = new Bounds(new Vector3(pos.x - 0.5f + ((float)size / 2), pos.y - 0.5f + ((float)size / 2), 0), new Vector3(10, 10, 0));
     }
 
     public bool AttackCell(Vector2 pos, CursorScriptableObject cursor)
     {
-        if(pos.x < 0 || pos.y < 0) { return false; }
-        if(pos.x > cells.GetLength(0) || pos.y > (cells.GetLength(1))) { return false; }
+        if (pos.x < 0 || pos.y < 0) { return false; }
+        if (pos.x > cells.GetLength(0) || pos.y > (cells.GetLength(1))) { return false; }
 
         Vector2Int _pos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
         if (cells[_pos.x, _pos.y].isDead) { return false; }
@@ -52,8 +69,8 @@ public class Board : MonoBehaviour
 
     public bool AttackCell(Vector2 pos)
     {
-        if(pos.x < 0 || pos.y < 0) { return false; }
-        if(pos.x > cells.GetLength(0) || pos.y > (cells.GetLength(1))) { return false; }
+        if (pos.x < 0 || pos.y < 0) { return false; }
+        if (pos.x > cells.GetLength(0) || pos.y > (cells.GetLength(1))) { return false; }
 
         Vector2Int _pos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
 
@@ -84,7 +101,7 @@ public class Board : MonoBehaviour
                 ship.partList[i].occupyingCell = cells[posToCheck.x, posToCheck.y];
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             Debug.LogWarning(e.ToString());
             return false;
         }

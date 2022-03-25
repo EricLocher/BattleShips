@@ -20,12 +20,11 @@ public class User : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
     #region Login/Register user
-
     public async static Task RegisterUser(string email, string password, string username)
     {
         if (user != null) { print("A user is already logged in!"); return; }
@@ -106,7 +105,5 @@ public class User : MonoBehaviour
     {
         string gamePath = $"games/{activeGame.gameID}";
         await SaveManager.SaveObject(gamePath, activeGame);
-
     }
-
 }

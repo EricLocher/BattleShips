@@ -17,16 +17,6 @@ public class GameController : MonoBehaviour
     public delegate void OnStateChange(TurnStates state);
     public static event OnStateChange OnStateChangeEvent;
 
-    void Awake()
-    {
-        if (_instance == null) {
-            _instance = this;
-        }
-        else {
-            Destroy(gameObject);
-        }
-    }
-
     void Start()
     {
 
@@ -40,7 +30,6 @@ public class GameController : MonoBehaviour
         }
 
         turnState = (TurnStates)userIndex;
-
         SaveManager.db.GetReference($"games/{User.activeGame.gameID}/players/{opponentIndex}/attack").ValueChanged += OnOpponentMove;
 
         //ShipList.list[(int)ship.type];

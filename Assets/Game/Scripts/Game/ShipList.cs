@@ -19,7 +19,7 @@ public class ShipList : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         list = _list;

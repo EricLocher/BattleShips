@@ -6,7 +6,6 @@ using SaveData;
 public class BoardController : MonoBehaviour
 {
     [SerializeField] Board _board;
-    [SerializeField] Camera _mainCamera;
     int boardSize = 10;
     Board _myBoard, _opponentBoard;
 
@@ -32,7 +31,7 @@ public class BoardController : MonoBehaviour
         GameController.OnStateChangeEvent += ChangeBoard;
         Mouse.OnMouseClickEvent += MouseClick;
 
-        _mainCamera.transform.position = new Vector3(4.5f, 4.5f, -10);
+        ChangeBoard(GameController.turnState);
     }
 
     void LoadShips(Board board, int playerIndex)
@@ -75,18 +74,33 @@ public class BoardController : MonoBehaviour
                 User.activeGame.players[GameController.userIndex].attack = _pos;
                 await User.SaveGameData();
                 GameController.NextTurn();
+                CheckWinCondition();
             }
         }
     }
     public void OpponentAttack(Vector2Int pos)
     {
         _myBoard.AttackCell(pos);
+        CheckWinCondition();
+    }
+
+    void CheckWinCondition()
+    {
+        if (_myBoard.deadBoard) {
+
+
+
+        } else if (_opponentBoard.deadBoard) {
+
+
+
+        }
     }
 
     void ChangeBoard(TurnStates state)
     {
-       if (state == TurnStates.OpponentTurn) {  }
-       else if(state == TurnStates.MyTurn) {  }
+       if (state == TurnStates.OpponentTurn) { _myBoard.activeBoard = false; _opponentBoard.activeBoard = true; }
+       else if(state == TurnStates.MyTurn) { _opponentBoard.activeBoard = false; _myBoard.activeBoard = true; }
     }
 
     void OnDestroy()

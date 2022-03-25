@@ -100,10 +100,8 @@ public class PlaceShips : MonoBehaviour
         await User.SaveUserData();
     }
 
-
     void OnDestroy()
     {
         Mouse.OnMouseClickEvent -= MouseClick;
     }
-
 }
