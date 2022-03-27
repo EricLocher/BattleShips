@@ -92,7 +92,7 @@ public class Board : MonoBehaviour
 
     public bool PlaceShip(Vector2 pos, Ship ship, bool hideShip = false)
     {
-        Vector2Int _pos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+        Vector2Int _pos = new Vector2Int((int)pos.x, (int)pos.y);
 
         try {
             for (int i = 0; i < ship.partList.Count; i++) {

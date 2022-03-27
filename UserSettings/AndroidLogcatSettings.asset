@@ -1,5 +1,5 @@
 {
-    "m_SelectedDeviceId": "",
+    "m_SelectedDeviceId": "WCR0218621005385",
     "m_SelectedPackage": {
         "deviceId": "",
         "name": "",
@@ -7,7 +7,44 @@
         "exited": false
     },
     "m_SelectedPriority": 0,
-    "m_KnownPackagesForSerialization": [],
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "WCR0218621005385",
+            "name": "com.battleshipsver2",
+            "processId": 21487,
+            "exited": true
+        },
+        {
+            "deviceId": "WCR0218621005385",
+            "name": "com.battleshipsver2",
+            "processId": 22408,
+            "exited": true
+        },
+        {
+            "deviceId": "WCR0218621005385",
+            "name": "com.battleshipsver2",
+            "processId": 23856,
+            "exited": true
+        },
+        {
+            "deviceId": "WCR0218621005385",
+            "name": "com.battleshipsver2",
+            "processId": 24895,
+            "exited": true
+        },
+        {
+            "deviceId": "WCR0218621005385",
+            "name": "com.huawei.android.launcher",
+            "processId": 2098,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR0218621005385",
+            "name": "com.battleshipsver2",
+            "processId": 25706,
+            "exited": false
+        }
+    ],
     "m_Tags": {
         "m_Entries": [
             {
@@ -41,9 +78,20 @@
         ]
     },
     "m_MemoryViewerState": {
-        "MemoryWindowHeight": 0.0,
-        "MemoryWindowWidth": 0.0,
-        "MemoryTypeEnabled": [],
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
         "MemoryGroup": 2,
         "Behavior": 0
     },
