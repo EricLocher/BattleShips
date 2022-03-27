@@ -10,6 +10,16 @@ public class Ship : MonoBehaviour
     public ShipType shipType;
     public Bounds bounds;
 
+    public bool deadShip
+    {
+        get {
+            foreach (ShipPart _part in partList) {
+                if (!_part.occupyingCell.isDead) { return false; }
+            }
+            return true;
+        }
+    }
+
     public static explicit operator ShipData(Ship ship)
     {
         return new ShipData(ship.pos, ship.direction, ship.shipType);

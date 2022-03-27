@@ -7,6 +7,7 @@ using SaveData;
 public class BoardController : MonoBehaviour
 {
     [SerializeField] Board _board;
+    [SerializeField] GameObject userUI, opponentUI;
     int boardSize = 10;
     Board _myBoard, _opponentBoard;
 
@@ -23,8 +24,8 @@ public class BoardController : MonoBehaviour
         _opponentBoard = Instantiate(_board, transform);
         _opponentBoard.name = "OpponentsBoard";
 
-        _myBoard.Init(new Vector2(-6.7f, 0), boardSize);
-        _opponentBoard.Init(new Vector2(6.7f, 0), boardSize);
+        _myBoard.Init(new Vector2(-6.7f, 0), boardSize, userUI);
+        _opponentBoard.Init(new Vector2(6.7f, 0), boardSize, opponentUI);
 
         LoadShips(_myBoard, GameController.userIndex);
         LoadShips(_opponentBoard, GameController.opponentIndex, true);

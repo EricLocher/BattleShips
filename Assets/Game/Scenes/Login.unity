@@ -691,6 +691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 266022442}
   - component: {fileID: 266022443}
+  - component: {fileID: 266022444}
   m_Layer: 5
   m_Name: Login
   m_TagString: Untagged
@@ -736,6 +737,19 @@ MonoBehaviour:
   email: {fileID: 2101821935}
   password: {fileID: 948423160}
   errorText: {fileID: 872278453}
+--- !u!114 &266022444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266022441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b92e9cc515e088c4091249f05ee35f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveInputFieldData: 1
 --- !u!1 &290447561
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,6 +996,7 @@ GameObject:
   m_Component:
   - component: {fileID: 387932473}
   - component: {fileID: 387932474}
+  - component: {fileID: 387932475}
   m_Layer: 5
   m_Name: Register
   m_TagString: Untagged
@@ -1029,6 +1044,19 @@ MonoBehaviour:
   password: {fileID: 133522524}
   errorText: {fileID: 611312673}
   backButton: {fileID: 1096666966}
+--- !u!114 &387932475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387932472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b92e9cc515e088c4091249f05ee35f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveInputFieldData: 1
 --- !u!1 &419770531
 GameObject:
   m_ObjectHideFlags: 0

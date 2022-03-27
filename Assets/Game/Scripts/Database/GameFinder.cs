@@ -20,11 +20,33 @@ public static class GameFinder
         return null;
     }
 
-    public static void FindGame(string gameID)
+    public static async Task<GameData> CreateGameWithID(string gameID)
     {
-        //TODO: Join the game with the given gameID.
-        throw new System.NotImplementedException();
+        GameData game = new GameData(gameID);
+        game.players[0] = new PlayerGameData(User.data.displayName, User.user.UserId, User.data.ships);
+        game.privateGame = true;
+
+        if (!await SaveManager.SaveObject($"games/{game.gameID}", game)) { return null; }
+        return game;
     }
+
+    public static async Task<bool> JoinGameWithID(string gameID)
+    {
+        GameData foundGame = await SaveManager.LoadObject<GameData>($"games/{gameID}");
+
+        if (foundGame != null && foundGame.players[0].userID != User.user.UserId) {
+            User.activeGame = foundGame; Debug.Log("Game found...");
+
+            foundGame.players[1] = new PlayerGameData(User.data.displayName, User.user.UserId, User.data.ships);
+            foundGame.activeGame = true;
+            await SaveManager.SaveObject($"games/{foundGame.gameID}", foundGame);
+
+            return true;
+        }
+
+        return false;
+    }
+
 
     public static async Task<GameData> CreateGame()
     {

@@ -7,29 +7,34 @@ public class Board : MonoBehaviour
 {
     [SerializeField] Cell _cell;
     [SerializeField] GameObject inactive;
+    public ShipUI[] uiList = null;
 
+    public Bounds bounds;
     public bool activeBoard
     {
         set { inactive.SetActive(value); }
     }
 
-    public Bounds bounds;
     public bool deadBoard
     {
         get {
-            foreach (Ship _ship in shipList) {
-                foreach (ShipPart _part in _ship.partList) {
-                    if (!_part.occupyingCell.isDead) { return false; }
+            bool dead = false;
+            for (int i = 0; i < shipList.Count; i++) {
+                if (!shipList[i].deadShip) {
+                    dead = false;
+                }
+                else {
+                    uiList[i].SwapImage();
                 }
             }
-            return true;
+            return dead;
         }
     }
 
     public Cell[,] cells;
     public List<Ship> shipList = new List<Ship>();
 
-    public void Init(Vector2 pos, int size = 10)
+    public void Init(Vector2 pos, int size = 10, GameObject ui = null)
     {
         transform.position = pos;
         cells = new Cell[size, size];
@@ -50,6 +55,11 @@ public class Board : MonoBehaviour
         }
 
         bounds = new Bounds(new Vector3(pos.x - 0.5f + ((float)size / 2), pos.y - 0.5f + ((float)size / 2), 0), new Vector3(10, 10, 0));
+
+        if(ui != null) {
+            uiList = ui.GetComponentsInChildren<ShipUI>();
+        }
+
     }
 
     public bool AttackCell(Vector2 pos, CursorScriptableObject cursor)
