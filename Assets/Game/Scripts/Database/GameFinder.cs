@@ -14,14 +14,10 @@ public static class GameFinder
         foreach (GameData game in games) {
             if (game.privateGame || game.activeGame) { continue; }
 
-            //TODO: Check if game has an 'empty' player slot.
-
-            //Return the first 'open' game found.
             return game;
         }
 
         return null;
-
     }
 
     public static void FindGame(string gameID)

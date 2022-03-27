@@ -11,7 +11,7 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         if (User.Instance == null) { SceneManager.LoadScene("Login"); }
-        userText.text = $"{User.data.displayName} \nWins: {User.data.wins}";
+        userText.text = $"User: {User.data.displayName} \nWins: {User.data.wins}";
     }
 
     public async void QuickPlay()
@@ -44,8 +44,9 @@ public class MenuController : MonoBehaviour
         SaveManager.db.GetReference($"games/{User.activeGame.gameID}/activeGame").ValueChanged -= GameStarted;
     }
 
-    void OnApplicationQuit()
+    async void OnApplicationQuit()
     {
         SaveManager.db.GetReference($"games/{User.activeGame.gameID}/activeGame").ValueChanged -= GameStarted;
+        await SaveManager.RemoveObject($"games/{User.activeGame.gameID}");
     }
 }

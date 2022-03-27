@@ -39,7 +39,7 @@ public class User : MonoBehaviour
 
         if(user == null) { return false; }
 
-        data = await LoadUserData();
+        await LoadUserData();
 
         return true;
     }
@@ -83,10 +83,10 @@ public class User : MonoBehaviour
 
 
     //Load the current user's data from database.
-    static async Task<UserData> LoadUserData()
+    static async Task LoadUserData()
     {
         userPath = $"users/{FirebaseAuth.DefaultInstance.CurrentUser.UserId}";
-        return await SaveManager.LoadObject<UserData>(userPath);
+        data =  await SaveManager.LoadObject<UserData>(userPath);
     }
 
     public static async Task<bool> SaveUserData()

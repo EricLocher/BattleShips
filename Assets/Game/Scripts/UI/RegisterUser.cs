@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using SaveData;
+using System.Collections.Generic;
 
 public class RegisterUser : MonoBehaviour
 {
@@ -15,6 +17,12 @@ public class RegisterUser : MonoBehaviour
         if (password.text == "") { errorText.text = "Invalid Password."; return; }
         if (password.text.Length < 8) { errorText.text = "The password must contain atleast 8 characters."; return; }
 
+        foreach (UserData user in await SaveManager.LoadMultipleObjects<UserData>("users/")) {
+            if(user.displayName == username.text) {
+                errorText.text = "A user with that username already exists.";
+                return;
+            }
+        }
 
         await User.RegisterUser(email.text, password.text, username.text);
 

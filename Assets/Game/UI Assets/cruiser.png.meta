@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: 802730421f4fc4a4497ad179843a1b49
+guid: 8c6cd04ef274b9b45a69aa3415e280ed
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1367045670975914968
-    second: battleship_0
+      213: 3746903078161025026
+    second: cruiser_0
   - first:
-      213: -8624132900074760577
-    second: battleship_1
+      213: 4805930468361189919
+    second: cruiser_1
   - first:
-      213: -7268991828639899960
-    second: battleship_2
-  - first:
-      213: -7830384077482222436
-    second: battleship_3
+      213: 5636623145132108880
+    second: cruiser_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -53,7 +50,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,28 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: battleship_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 120
-        width: 40
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d3414a7bc8b8f210800000000000000
-      internalID: 1367045670975914968
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: battleship_1
+      name: cruiser_0
       rect:
         serializedVersion: 2
         x: 0
@@ -174,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f76d84be1dce05880800000000000000
-      internalID: -8624132900074760577
+      spriteID: 2080b956f7caff330800000000000000
+      internalID: 3746903078161025026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: battleship_2
+      name: cruiser_1
       rect:
         serializedVersion: 2
         x: 0
@@ -195,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ce93b2d17a5f1b90800000000000000
-      internalID: -7268991828639899960
+      spriteID: f1a35ed4c4812b240800000000000000
+      internalID: 4805930468361189919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: battleship_3
+      name: cruiser_2
       rect:
         serializedVersion: 2
         x: 0
@@ -216,8 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9c1cce2b23e45390800000000000000
-      internalID: -7830384077482222436
+      spriteID: 05c285ae2ee493e40800000000000000
+      internalID: 5636623145132108880
       vertices: []
       indices: 
       edges: []

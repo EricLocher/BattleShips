@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -8624132900074760577, guid: d49399f4287d69e4db2e7e2c02b6faba, type: 3}
+  m_Sprite: {fileID: -8624132900074760577, guid: 802730421f4fc4a4497ad179843a1b49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   occupyingCell: {fileID: 0}
+  spr: {fileID: 0}
 --- !u!1 &298966476749149643
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1367045670975914968, guid: d49399f4287d69e4db2e7e2c02b6faba, type: 3}
+  m_Sprite: {fileID: 1367045670975914968, guid: 802730421f4fc4a4497ad179843a1b49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   occupyingCell: {fileID: 0}
+  spr: {fileID: 0}
 --- !u!1 &298966476918716410
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +355,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -7268991828639899960, guid: d49399f4287d69e4db2e7e2c02b6faba, type: 3}
+  m_Sprite: {fileID: -7268991828639899960, guid: 802730421f4fc4a4497ad179843a1b49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -377,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   occupyingCell: {fileID: 0}
+  spr: {fileID: 0}
 --- !u!1 &2954913578696436107
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +452,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -7830384077482222436, guid: d49399f4287d69e4db2e7e2c02b6faba, type: 3}
+  m_Sprite: {fileID: -7830384077482222436, guid: 802730421f4fc4a4497ad179843a1b49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -473,3 +476,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   occupyingCell: {fileID: 0}
+  spr: {fileID: 0}

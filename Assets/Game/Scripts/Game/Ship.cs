@@ -14,6 +14,7 @@ public class Ship : MonoBehaviour
     {
         return new ShipData(ship.pos, ship.direction, ship.shipType);
     }
+
     void Start()
     {
         UpdateRotation();
@@ -24,6 +25,7 @@ public class Ship : MonoBehaviour
     {
         bounds.center = new Vector2(transform.position.x, transform.position.y - partList.Count / 2);
     }
+
     public void UpdateRotation()
     {
         if(direction == Direction.Vertical) { transform.eulerAngles = new Vector3(0, 0, 0); }

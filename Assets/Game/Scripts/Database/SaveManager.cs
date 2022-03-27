@@ -72,7 +72,7 @@ public class SaveManager : MonoBehaviour
     /// </summary>
     /// <typeparam name="T">Object Type</typeparam>
     /// <param name="path">Database Path</param>
-    /// <returns>List of objects of the type (T)</returns>
+    /// <returns>List of objects of the type (T). returns null if an error occured.</returns>
     public async static Task<List<T>> LoadMultipleObjects<T>(string path)
     {
 
@@ -126,6 +126,15 @@ public class SaveManager : MonoBehaviour
         });
     }
 
+    public async static Task RemoveObject(string path)
+    {
+        await db.RootReference.Child(path).RemoveValueAsync().ContinueWith(task => {
+            if (task.Exception != null) {
+                Debug.LogWarning(task.Exception);
+            }
+            return;
+        });
+    }
     #endregion
 }
 

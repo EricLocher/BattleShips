@@ -23,8 +23,8 @@ public class BoardController : MonoBehaviour
         _opponentBoard = Instantiate(_board, transform);
         _opponentBoard.name = "OpponentsBoard";
 
-        _myBoard.Init(new Vector2(0, -6), boardSize);
-        _opponentBoard.Init(new Vector2(0, 6), boardSize);
+        _myBoard.Init(new Vector2(-6.7f, 0), boardSize);
+        _opponentBoard.Init(new Vector2(6.7f, 0), boardSize);
 
         LoadShips(_myBoard, GameController.userIndex);
         LoadShips(_opponentBoard, GameController.opponentIndex, true);
@@ -85,13 +85,13 @@ public class BoardController : MonoBehaviour
         CheckWinCondition();
     }
 
-    void CheckWinCondition()
+    async void CheckWinCondition()
     {
         if (_myBoard.deadBoard) {
             SceneManager.LoadScene("Lose");
         } else if (_opponentBoard.deadBoard) {
             User.data.wins += 1;
-            User.SaveUserData();
+            await User.SaveUserData();
             SceneManager.LoadScene("Win");
         }
     }
