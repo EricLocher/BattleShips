@@ -18,7 +18,7 @@ public class Board : MonoBehaviour
     public bool deadBoard
     {
         get {
-            bool dead = false;
+            bool dead = true;
             for (int i = 0; i < shipList.Count; i++) {
                 if (!shipList[i].deadShip) {
                     dead = false;
